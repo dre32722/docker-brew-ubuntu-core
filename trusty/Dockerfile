@@ -43,5 +43,31 @@ RUN sed -i 's/^#\s*\(deb.*universe\)$/\1/g' /etc/apt/sources.list
 # See: https://github.com/systemd/systemd/blob/aa0c34279ee40bce2f9681b496922dedbadfca19/src/basic/virt.c#L434
 RUN mkdir -p /run/systemd && echo 'docker' > /run/systemd/container
 
+RUN lsb_release -d
+
+RUN sudo apt-get update
+
+RUN sudo apt-get install -y apt-transport-https ca-certificates software-properties-common curl
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+RUN sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+#RUN sudo apt-get install -y curl
+
+RUN sudo apt-get update
+RUN sudo apt-get install -y docker-ce
+RUN docker --version
+RUN sudo service docker start
+RUN sudo docker run hello-world
+
+RUN sudo apt-get -y install libc-dev-bin libc6 libc6-dev
+
+RUN sudo apt-get install -y recode
+RUN sudo apt-get install jq
+
+RUN jq --version
+RUN curl --version
+
+# ADD run.sh /tmp
+
 # overwrite this with 'CMD []' in a dependent Dockerfile
 CMD ["/bin/bash"]
