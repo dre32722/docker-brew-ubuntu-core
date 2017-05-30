@@ -46,21 +46,6 @@ RUN mkdir -p /run/systemd && echo 'docker' > /run/systemd/container
 RUN lsb_release -d
 
 RUN sudo apt-get update
-RUN sudo apt-get install -y software-properties-common
-
-RUN sudo apt-get -y install \
-  apt-transport-https \
-  ca-certificates \
-  curl
-
-RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-
-RUN sudo add-apt-repository \
-       "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-       $(lsb_release -cs) \
-       stable"
-
-RUN sudo apt-get update
 
 RUN sudo apt-get -y install libc-dev-bin libc6 libc6-dev
 RUN sudo apt-get install -y recode
