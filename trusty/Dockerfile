@@ -55,12 +55,5 @@ RUN sudo curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
 RUN sudo apt-get install -y build-essential
 
-RUN jq --version
-RUN curl --version
-RUN recode --version
-RUN node --version
-
-# ADD run.sh /tmp
-
 # overwrite this with 'CMD []' in a dependent Dockerfile
 CMD ["/bin/bash"]
